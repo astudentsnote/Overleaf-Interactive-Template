@@ -269,8 +269,103 @@ Editing a table in raw code gets confusing fast, especially once it has many row
 For genuinely simple tables, you can also use the ready-made table button in the toolbar at the top of the middle panel, which inserts a basic tabular skeleton for you to fill in. It's fine for quick, simple tables, but very basic --- for anything with proper formatting (like the \texttt{booktabs} style used above), you're better off using the template already in this document.
 
 \subsubsection*{Regression Tables}
-The documents also include a template for nice regression tables. Send it to the AI before letting it generate new tables from R/Stata output, so everything is neat and consistent. You can of course also use your own, just make it consistent across one document. 
 
+The documents also include templates for clean, consistent regression tables. The workflow that works best: run your regression in R or Stata, copy the raw output (coefficients, confidence/credible intervals, standard errors, whatever your output includes), and paste it into the AI chat together with one of the two table templates below. Ask the AI to fill the template with your results while keeping the exact structure and formatting untouched. This keeps every table in your document visually consistent, even if you generate them one at a time over several weeks.
+
+You can of course use your own table design instead of the ones below -- the important part is picking one design and feeding it to the AI every time, so tables don't end up looking different from each other throughout the document.
+
+\paragraph{Template 1: Coefficients with credible/confidence intervals (multi-model comparison).}
+Useful when you want to show several model specifications side by side (e.g. baseline, with controls, robustness checks), with each coefficient followed by its interval directly underneath.
+
+\begin{table}[htbp]
+\centering
+\caption{\small Bayesian logit models of policy removal}
+\label{tab:removal_models}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lcccc}
+\toprule
+ & M1 & M2 & R1 & R2 \\
+\midrule
+Liberal regime
+  & 0.57 & 0.55 & 0.51 & 0.55 \\
+  & [-0.09, 1.25] & [-0.40, 1.50] & [-0.22, 1.25] & [-0.41, 1.52] \\
+
+Social-democratic regime
+  & 0.96 & 0.97 & 0.88 & 0.98 \\
+  & [0.27, 1.67] & [0.14, 1.91] & [0.29, 1.47] & [0.16, 1.94] \\
+
+Portfolio size ($z$)
+  &  & 0.01 & -0.02 & 0.01 \\
+  &  & [-0.36, 0.39] & [-0.30, 0.27] & [-0.37, 0.39] \\
+
+Debt-to-GDP ($z$)
+  &  & -0.05 & -0.11 & -0.04 \\
+  &  & [-0.42, 0.34] & [-0.43, 0.20] & [-0.40, 0.34] \\
+
+Population ageing 65+ ($z$)
+  &  & -0.05 & -0.03 & -0.05 \\
+  &  & [-0.46, 0.34] & [-0.37, 0.30] & [-0.46, 0.35] \\
+
+Crisis lag
+  &  & 0.75 & 0.72 & 0.76 \\
+  &  & [0.12, 1.36] & [0.09, 1.31] & [0.14, 1.37] \\
+
+Duration
+  &  &  &  & -0.00 \\
+  &  &  &  & [-0.03, 0.03] \\
+
+Intercept
+  & -6.17 & -6.32 & -6.23 & -6.28 \\
+  & [-6.79, -5.59] & [-7.00, -5.69] & [-6.80, -5.70] & [-7.15, -5.49] \\
+
+SD country intercept
+  & 0.31 & 0.40 &  & 0.41 \\
+  & [0.02, 0.77] & [0.02, 0.94] &  & [0.03, 0.92] \\
+
+\midrule
+Year fixed effects
+  & Yes & Yes & Yes & Yes \\
+
+Country random intercept
+  & Yes & Yes & No & Yes \\
+
+Observations
+  & 15{,}862 & 15{,}862 & 15{,}862 & 15{,}862 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\vspace{0.3em}
+\begin{minipage}{0.95\textwidth}
+\footnotesize
+\textit{Notes}: Entries are posterior means; 95\% credible intervals in brackets. Year coefficients are included in all models but omitted from the table for readability. M1 = baseline multilevel model; M2 = baseline multilevel model with controls; R1 = robustness model without country random intercept; R2 = robustness model with duration. All models are estimated on the same baseline sample of 17 OECD countries over 1976--2015. Priors: intercept \(\mathcal{N}(-5.2, 2^2)\); welfare-regime coefficients \(\mathcal{N}(0, 2.5^2)\); control variables \(\mathcal{N}(0, 1^2)\); SD of the country-level random intercept Student-\(t(3, 0, 1)\). The random-intercept prior does not apply to model R1.
+\end{minipage}
+\end{table}
+
+\paragraph{Template 2: Decomposition/variance table across time periods.}
+Useful when you want to show how a set of components (e.g. variance shares, decomposition terms) evolves across several time periods, plus a percentage-of-total and change column.
+
+\begin{table}[t]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lcccccccc}
+\toprule
+ & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8) \\
+ & 1985--1991 & 1990--1996 & 1996--2002 & 2002--2008 & 2008--2014 & \% & $\Delta$ 2014--1985 & \% \\
+\midrule
+Var mean log wages      & 61.7 & 58.2 & 64.0 & 79.4 & 94.6 & 100 & 32.9 & 100 \\
+Var mean worker effects & 15.2 & 15.6 & 22.8 & 32.1 & 37.7 & 39.8 & 22.5 & 68.4 \\
+Var mean plant effects  & 21.1 & 21.3 & 17.0 & 18.3 & 22.3 & 23.6 &  1.2 &  3.6 \\
+Var mean $Xb$           &  0.8 &  0.4 &  0.3 &  0.4 &  0.6 &  0.6 & -0.2 & -0.7 \\
+2 Cov(worker, plant)    & 19.3 & 18.4 & 25.0 & 33.2 & 39.4 & 41.7 & 20.1 & 61.0 \\
+2 Cov(worker, $Xb$)     &  2.8 &  1.5 & -0.8 & -3.0 & -3.5 & -3.7 & -6.3 & -19.1 \\
+2 Cov(plant, $Xb$)      &  2.4 &  1.1 & -0.2 & -1.5 & -1.9 & -2.0 & -4.3 & -13.1 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\caption{Decomposition of across-city variation in average wages; see Table 3 in the paper.}
+\label{tab:varDecomp}
+\end{table}
 
 \subsection*{Citations with natbib}
 
