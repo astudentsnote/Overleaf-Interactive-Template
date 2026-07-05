@@ -19,11 +19,17 @@ Both templates include their own introduction section explaining how to use them
 
 ## How to Use This Template (No GitHub Experience Needed)
 
-1. Click the green "Code" button above the file list on this page.
+1. Click the green "Code" button above the file list on this page. (Alternatively, click on Template v.1.0.0 on the right panel, just below "Releases"). 
 2. Select "Download ZIP."
-3. Go to Overleaf, click "New Project," then "Upload Project."
-4. Select the ZIP file you just downloaded.
-5. Overleaf will open the project automatically. Follow the instructions in `Template_main.tex` from there.
+
+**Note for Safari users:** Safari automatically unzips downloaded files. If this happens, right-click the extracted folder in Finder and select "Compress" to create a `.zip` file before uploading it to Overleaf.
+
+(Same for any other instance you get a folder after downloading instead of a .zip, just re-zip before going to Step4)
+
+
+4. Go to Overleaf, click "New Project," then "Upload Project."
+5. Select the ZIP file you just downloaded.
+6. Overleaf will open the project automatically. Follow the instructions in `Template_main.tex` from there.
 
 ## Next Step: Getting Started in Overleaf
 
