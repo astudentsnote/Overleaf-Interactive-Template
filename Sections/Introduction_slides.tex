@@ -1,0 +1,138 @@
+\section{Chapter1}
+\SetFootline{1}
+
+\begin{frame}{Scary Frame Environment}
+Everything here works like in a regular DinA4 file. So you can use equations, tables, etc.\ like in the main template. There are just a few tweaks important for using the beamer template (that's the template for slides).
+
+\vspace{0.3cm}
+In general, slides require more case-by-case customisation by you, plus a lot of trial and error so it looks nice. 
+
+\begin{itemize}
+    \item Make use of \texttt{\textbackslash vspace\{\}} to create paragraph-like spacing.
+    \item Use \texttt{\textbackslash small\{\}}, \texttt{\textbackslash footnotesize\{\}} etc. to scale any text.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\begin{enumerate}[label=\alph*)]
+    \item If you use enumerate or itemize, think about specifying the label.
+    \item Because in Beamer you get an error if you use enumerate and don't specify one (for options, see \texttt{introduction.tex}).
+    \item For itemize lists I defined a standard here; adjust it if you want (this then overrides the standard locally).
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Scary Frame Environment (2)}
+    You can use the \texttt{columns} environment to get two columns side by side (adjusting each column's height with \texttt{\textbackslash vspace\{\}} again if one is shorter than the other):
+
+\vspace{0.3cm}
+
+\begin{columns}
+  \begin{column}{0.48\textwidth}
+    Each \texttt{column} takes a width (here \texttt{0.5\textbackslash textwidth}) and behaves like its own small block -- text, images, or tables can go inside.
+  \end{column}
+  \begin{column}{0.48\textwidth}
+    The widths of all columns should add up to a bit less than 1 (e.g.\ two at 0.48 each) to leave a small gap between them.
+  \end{column}
+\end{columns}
+
+\end{frame}
+
+
+
+\begin{frame}{Basic Frame Types}
+Every slide is its own frame. Unlike a DinA4 document, content does not flow automatically onto a next page -- if it overflows, it simply gets cut off, so each frame needs deliberate content limits.
+
+\vspace{0.3cm}
+\texttt{\textbackslash begin\{frame\}\{Title\} ... \textbackslash end\{frame\}}
+\end{frame}
+
+\begin{frame}[c]{Centralising Content: [c]}
+Adding \texttt{[c]} right after \texttt{\textbackslash begin\{frame\}} vertically centers the content on the slide.
+
+\vspace{0.3cm}
+Useful for short content (one sentence, one equation, one research question) that would otherwise look sparse pinned to the top of an empty slide.
+\end{frame}
+
+\begin{frame}[plain]{Frame Without Footline: [plain]}
+Adding \texttt{[plain]} removes the footline (progress bar, page number) for just this one slide, without affecting any other slide.
+
+\vspace{0.3cm}
+This is used for the title page and, if activated, the table of contents slide.
+\end{frame}
+
+\begin{frame}[fragile]{Frame With Special Content: [fragile]}
+Adding \texttt{[fragile]} is required whenever a frame contains verbatim code (like the code snippets shown throughout this tutorial itself) or certain TikZ constructions.
+
+\vspace{0.3cm}
+If a slide throws an unexplained compilation error involving special characters, adding \texttt{[fragile]} is often the fix.
+\end{frame}
+
+\section{Chapter2}
+\SetFootline{2}
+
+\begin{frame}{How Chapters and the Progress Bar Work}
+
+The progress bar you see at the bottom of this slide is customised. So a short explanation is in order.
+
+\vspace{0.3cm}
+Each \texttt{\textbackslash section\{ChapterName\}} should be followed immediately by \texttt{\textbackslash SetFootline\{N\}}, where \texttt{N} is that chapter's position in \texttt{\textbackslash ChapterList} (defined in the preamble).
+
+\vspace{0.3cm}
+This highlights the current phase in the progress bar shown at the bottom of every slide in that chapter. If you look at the bottom of this slide and compare it with the previous one, you will see that the highlighted part moved from Chapter1 to Chapter2 (you can rename them in the Preamble\_slides.tex document, of course).
+\end{frame}
+
+\begin{frame}{Adding or Removing a Chapter}
+Edit \texttt{\textbackslash ChapterList} once, in the preamble's configuration block. All \texttt{\textbackslash SetFootline\{N\}} calls after the changed position must then be renumbered to match, since \texttt{N} refers to a chapter's position in the list, counting from 1.
+
+\vspace{0.3cm}
+(This is also explained in the relevant preamble section.)
+\end{frame}
+
+\begin{frame}{Cross-Referencing Slides}
+\label{Slide 5}
+This slide is labeled with \texttt{\textbackslash label\{Slide 10\}}. Later, writing "see Slide~\ref{Slide 5}" creates a clickable, auto-updating reference like in the main document.
+\end{frame}
+
+\begin{frame}[c]{Highlighted Takeaway Box}
+\begin{tcolorbox}[insightsbox]
+Key takeaways or implications go here.
+\end{tcolorbox} 
+
+\vspace{0.3cm}
+This pre-styled box (colour, border, title) is already configured in the preamble -- just wrap any text you want to visually set apart.
+
+\vspace{0.3cm}
+
+specify the title locally if you don't want an Implication box using: \texttt{\textbackslash begin\{tcolorbox\}[insightsbox, title= Your Title]}.
+
+\end{frame}
+
+\begin{frame}{Shrinking a Wide Table}
+Like in the main document \texttt{adjustbox} scales a table proportionally so it always fits the slide width without overflowing. For example: 
+
+\vspace{0.3cm}
+
+\begin{table}[t]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lcccccccc}
+\toprule
+ & (1) &  & (5) & (6) & (7) & (8) \\
+ & 1985--1991 & [...] & 2008--2014 & \% & $\Delta$ 2014--1985 & \% \\
+\midrule
+Var mean log wages      & \textbf{61.7} &  & \textbf{94.6} & 100 & 32.9 & 100 \\
+Var mean worker effects & 15.2 &  & 37.7 & 39.8 & 22.5 & \textbf{68.4} \\
+Var mean plant effects  & 21.1 &  & 22.3 & 23.6 &  1.2 &  3.6 \\
+Var mean $Xb$           &  0.8 &  &  0.6 &  0.6 & -0.2 & -0.7 \\
+2 Cov(worker, plant)    & 19.3 &  & 39.4 & 41.7 & 20.1 & \textbf{61.0} \\
+2 Cov(worker, $Xb$)     &  2.8 &  & -3.5 & -3.7 & -6.3 & -19.1 \\
+2 Cov(plant, $Xb$)      &  2.4 &  & -1.9 & -2.0 & -4.3 & -13.1 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\caption{Decomposition of across-city variation in average wages; see Table 3 in \citet{dauthMatchingCities2022}}
+\label{tab:varDecomp}
+\end{table}
+
+\end{frame}

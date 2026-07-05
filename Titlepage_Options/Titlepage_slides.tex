@@ -1,0 +1,24 @@
+\title[Place]{Presentation Title}
+\author[Author Short]{Author Name}
+\institute[\UniversityName]{
+     \\
+    \DepartmentName, \\ \UniversityName
+}
+\vspace{2cm}
+
+\titlegraphic{
+     \begin{tikzpicture}[remember picture,overlay]
+     \node[anchor=south east, yshift=8pt, xshift=0pt] at (current page.south east)
+     {\includegraphics[width=1.5cm]{\UniversityLogo}};
+     \end{tikzpicture}
+ }
+
+\addtobeamertemplate{frametitle}{}{%
+\begin{tikzpicture}[remember picture,overlay]
+     \node[anchor=south east, yshift=8pt, xshift=0pt] at (current page.south east)
+     {\includegraphics[width=1.5cm]{\UniversityLogo}};
+     \end{tikzpicture}
+ }
+
+
+

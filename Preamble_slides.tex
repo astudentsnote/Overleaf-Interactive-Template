@@ -1,0 +1,198 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1. FONTS: Times-style text and math font, matching the main document
+%    exactly for visual consistency between thesis and slides.
+%    Alternatives (swap this block):
+%      Libertine:  \usepackage{libertine} + \usepackage[libertine]{newtxmath}
+%      XCharter:   \usepackage{xcharter}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{newtxtext}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2. MICROTYPOGRAPHY: subtle spacing tweaks for cleaner justified text.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{microtype}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3. LANGUAGE & ENCODING: special characters + hyphenation rules.
+%    Kept identical to the main document preamble so both compile
+%    consistently if you copy content between them.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 4. MATH: equations, symbols, theorem environments, bold vectors.
+%    Identical setup to the main document so equations render exactly
+%    the same way on slides as in the thesis.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{newtxmath} % load after amsmath; swap if using an alt font (see above)
+\let\openbox\relax     % avoids a naming clash between amsthm and another package
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 5. GRAPHICS, FIGURES & TABLES: same core packages as the main document,
+%    minus the ones rarely needed on slides (subcaption, rotating, lscape).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{float}
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{adjustbox}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 6. TEXT DECORATION & LISTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{enumitem}
+\setlist[itemize,1]{label=\usebeamertemplate{itemize item}}
+\setlist[itemize,2]{label=\usebeamertemplate{itemize subitem}}
+\setlist[itemize,3]{label=\usebeamertemplate{itemize subsubitem}}
+
+\usepackage{bbding}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 7. DIAGRAMS: TikZ for custom diagrams/flowcharts, identical setup to the
+%    main document so figures can be copied between thesis and slides
+%    without adjustment.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc,decorations.pathreplacing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 8. POSITIONING & COLORS: textpos allows placing elements at absolute
+%    coordinates on a slide. xcolor must load before any \definecolor
+%    call below, and before tcolorbox.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[absolute,overlay]{textpos}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 9. BIBLIOGRAPHY: same author-year citation setup as the main document,
+%    shared via the same file so \citep{}/\citet{} and the citation style
+%    stay perfectly consistent between thesis and slides. Edit only in
+%    Front Matter/bibliography_setup.tex.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{Front Matter/bibliography_setup}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 10. BEAMER BEHAVIOUR: hides the default navigation arrows/symbols at the
+%     bottom of every slide.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\beamertemplatenavigationsymbolsempty
+
+%% =====================================================================
+%% 11. UNIVERSITY / PRESENTATION CONFIGURATION
+%%  --> Edit ONLY this block to adapt the template to a new university
+%%      or department, and to re-brand the theme colour or agenda labels.
+%%
+%%  NOTE: The presentation title, author, and place are NOT set here.
+%%  Edit them directly in Titlepage_Options/Titlepage_slides.tex, inside the
+%%  \title{}, \author{}, and \institute{} commands. Add extra lines (e.g. a supervisor's address inside \institute{}) if required.
+%% =====================================================================
+
+% --- Institution (reused across all title page options and slide corners) ---
+\newcommand{\UniversityName}{Your University}
+\newcommand{\UniversityLogo}{images/university_logo.png}
+\newcommand{\DepartmentName}{Department / Chair Name}
+
+% --- Agenda / chapter labels used in the progress footline ---
+\def\ChapterList{Chapter1,Chapter2,Chapter3,Chapter4,Chapter5,Appendix}
+
+% --- Theme colour (change hex/RGB to re-brand) ---
+\definecolor{ThemeColor}{RGB}{43,134,75}
+
+%% =====================================================================
+%%  THEME SETUP  (do not need to edit below this line for a new university)
+%% =====================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 12. THEME & COLOURS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetheme{default}
+\usecolortheme{Theme}
+
+\setbeamertemplate{section in toc}[sections numbered]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 13. HIGHLIGHTED BOXES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tcbset{
+  insightsbox/.style={
+    enhanced,
+    colback=ThemeColor!4,
+    colframe=ThemeColor!85!black,
+    boxrule=0.9pt,
+    arc=2pt,
+    left=6pt,right=6pt,top=6pt,bottom=6pt,
+    fonttitle=\bfseries,
+    coltitle=white,
+    title={Implication},
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 14. FOOTLINE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{xstring}
+\usepackage{etoolbox}
+\newcounter{phasecount}
+\newcounter{currentphase}
+\setcounter{currentphase}{1}
+
+\newcommand{\ProcessChapter}[1]{%
+  \stepcounter{phasecount}%
+  \ifnum\thephasecount=\thecurrentphase
+    \textcolor{ThemeColor}{\textbf{#1}}%
+  \else
+    #1%
+  \fi
+  \ifnum\thephasecount=6\relax\else\ $\rightarrow$ \fi
+}
+
+%---- OPTIONAL: Exclude specific slides (e.g. title page, appendix,
+%     bibliography) from the frame count shown in the footline ----%
+% By default, the footline shows Beamer's built-in \insertframenumber and
+% \inserttotalframenumber, which count every single frame in the document,
+% including the title page, appendix, and bibliography slides.
+%
+% If you want an ACCURATE count that only includes your actual content
+% slides, uncomment the three lines below AND manually add
+% \stepcounter{realframe} inside every content frame that should count
+% (i.e. every frame EXCEPT the title page, appendix, and bibliography).
+%
+% IMPORTANT: after activating this or changing which slides count, you
+% need to compile TWICE for the total to display correctly. The first
+% compile just records the count; the second one reads it back correctly.
+% If the total looks wrong or blank, just recompile once more.
+%
+% \usepackage{totcount}
+% \newtotcounter{realframe}
+% \renewcommand{\insertframenumber}{\total{realframe}}
+% \newcommand{\realtotal}{\total{realframe}}
+% % Then replace \inserttotalframenumber with \realtotal in the footline
+% % template below, and add \stepcounter{realframe} inside each counted frame.
+
+\defbeamertemplate{footline}{progressfootline}{%
+  \leavevmode\hbox{%
+    \begin{beamercolorbox}[wd=.85\paperwidth,ht=2.5ex,dp=1.2ex,left]{}%
+      \hspace{1em}\tiny
+      \setcounter{phasecount}{0}%
+      \edef\temp{\noexpand\forcsvlist{\noexpand\ProcessChapter}{\ChapterList}}%
+      \temp
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.14\paperwidth,ht=2.5ex,dp=1.2ex,right]{}%
+      \tiny\insertframenumber/\inserttotalframenumber\hspace{0.3em}%
+    \end{beamercolorbox}%
+  }%
+}
+\setbeamertemplate{footline}[progressfootline]
+
+\newcommand{\SetFootline}[1]{%
+  \setcounter{currentphase}{#1}%
+}

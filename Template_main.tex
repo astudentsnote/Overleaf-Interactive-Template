@@ -1,0 +1,55 @@
+\documentclass[12pt,a4paper]{article}
+
+\input{Preamble.tex}
+
+\begin{document}
+
+% ----- TITLEPAGE: uncomment ONE option below + uncomment its matching -----
+% \newpage or \vspace line. Edit name/details in the respective .tex file inside the Titlepage_Options folder.
+
+\input{Titlepage_Options/Titlepage_Option1} % Suited for Bachelor's/Master's theses requiring formal author and supervisor contact blocks.
+\newpage
+
+%\input{Titlepage_Options/Titlepage_Option2} % Suited for seminar papers, review papers, or term papers that reference one specific assigned source.
+%\newpage
+
+%\input{Titlepage_Options/Titlepage_Option3} % Conference-style papers or courses without strict formatting requirements, where a lighter visual feel is preferred.
+%\newpage
+
+%\input{Titlepage_Options/Titlepage_Option4} % Homework assignments. Starts on the same page (uses \vspace instead of \newpage) since a full title page is usually unnecessary here.
+%\vspace{1cm}
+
+% ----- ABSTRACT: comment out the line below to skip the abstract page -----
+%\input{FrontMatter/Abstract.tex}
+%\newpage
+
+% ----- TABLE OF CONTENTS / LIST OF TABLES / LIST OF FIGURES -----
+% Comment out to skip. Edit inside the file which of the three you want, and whether to keep the "intentionally left blank" page.
+
+%\input{FrontMatter/TableOfContentsEtAl.tex}
+
+\pagenumbering{arabic}
+
+% ----- END OF FRONT MATTER -----
+
+% Add your sections to the Sections folder by adding .tex documents with the respective names and following the Introduction example for the commands. Choose a suitable spacing between the sections e.g. \clearpage or \vspace{Xcm}, \medskip
+
+\input{Sections/Introduction.tex}
+
+% ----- BIBLIOGRAPHY -----
+
+\newpage
+\bibliography{references}
+
+% ----- APPENDIX or APPENDICES -----
+% Contrary to normal sections, the appendix is named A, B, C, etc. Uncomment if needed.
+
+%\newpage
+%\appendix
+%\input{Sections/Appendix.tex}
+
+\end{document}
+
+
+
+

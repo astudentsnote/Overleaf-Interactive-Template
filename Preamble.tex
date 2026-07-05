@@ -1,0 +1,179 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1. FONTS: Times-style text and math font.
+%    Alternatives (swap this block):
+%      Libertine:  \usepackage{libertine} + \usepackage[libertine]{newtxmath}
+%      XCharter:   \usepackage{xcharter}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{newtxtext}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2. MICROTYPOGRAPHY: subtle spacing tweaks for cleaner justified text.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{microtype}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3. LANGUAGE & ENCODING: special characters + hyphenation rules.
+%    Swap "english" for your language if needed, e.g.:
+%      \usepackage[ngerman]{babel}   % German
+%      \usepackage[french]{babel}    % French
+%    This automatically updates hyphenation patterns and auto-generated
+%    text like "Figure"/"Abbildung" without touching anything else here.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\hyphenpenalty=1000
+\exhyphenpenalty=50
+\tolerance=1000
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 4. MATH: equations, symbols, theorem environments, bold vectors.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{newtxmath} % load after amsmath; swap if using an alt font (see above)
+\let\openbox\relax     % avoids a naming clash between amsthm and another package
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 5. GRAPHICS, FIGURES & TABLES
+%
+%    TIP: Building tables by hand is tedious and error-prone, especially
+%    regression output tables (coefficients, standard errors, significance
+%    stars, footnotes). Recommended workflow instead:
+%      1. Run your regression in R (or Python/Stata) and export the raw
+%         output, or just take a screenshot of the R console/table.
+%      2. Paste the R output or screenshot into an AI assistant and ask it
+%         to generate a LaTeX table using booktabs (\toprule, \midrule,
+%         \bottomrule) that matches your regression results.
+%      3. Compile the generated code as-is, then manually tweak only small
+%         details afterward: column widths, number formatting, footnote
+%         text for significance levels (e.g. * p<0.10, ** p<0.05), or
+%         table width via adjustbox if it overflows the page margin.
+%    This is far faster than manually transcribing coefficients and gets
+%    you a clean, publication-style table (similar to R's stargazer or
+%    modelsummary output) without writing raw tabular code by hand.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{adjustbox}
+\usepackage{tcolorbox}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 6. UNITS (OPTIONAL): only needed for physical units or numeric tables
+%    that require consistent decimal alignment, e.g. "3.14 kg".
+%    Comment out if you don't work with measurements/units.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \usepackage{siunitx}
+% \sisetup{detect-all}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 7. TEXT DECORATION & LISTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{enumitem}
+\usepackage[normalem]{ulem} % enables \sout{} strikethrough
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 8. DIAGRAMS (OPTIONAL): TikZ for custom diagrams/flowcharts drawn in code.
+%
+%    TIP: Writing TikZ by hand is painful, especially node positioning and
+%    arrows. Recommended workflow instead:
+%      1. Describe the diagram to an AI assistant (e.g. "causal diagram
+%         showing X affects Y through mediator Z, with labeled arrows")
+%         and ask it to generate the TikZ code.
+%      2. Compile the generated code as-is to see the rough layout.
+%      3. Manually tweak only the fine details afterward: node coordinates
+%         (via the "positioning" library, e.g. right=of, below=of),
+%         arrow styles, and spacing values, since these are the parts
+%         AI often gets slightly off but are easy to nudge by eye.
+%    TikZ is very flexible this way: flowcharts, causal mechanisms,
+%    timelines, or statistical illustrations all render as crisp vector
+%    graphics that scale perfectly in the final PDF, unlike a screenshot.
+%    Uncomment only if you actually plan to draw diagrams in LaTeX.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc,decorations.pathreplacing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 9. COLORS: custom color definitions used in tables/highlights.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{xcolor}
+\usepackage{colortbl}
+\definecolor{regblue}{RGB}{220, 230, 242}
+\definecolor{headerblue}{RGB}{169, 196, 223}
+\definecolor{emptycell}{RGB}{245, 245, 245}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 10. BIBLIOGRAPHY: author-year citations (natbib/plainnat = Harvard style,
+%     common in economics).
+%       See folder Front Matter and then document "bibliography_setup.tex" for      explaination how it works.
+%       If you want to edit, edit in "bibliography_setup.tex".
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{Front Matter/bibliography_setup}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 11. PAGE LAYOUT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[a4paper,left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+\usepackage{multicol}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 12. FOOTNOTES: smaller font, single line spacing.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[hang, flushmargin]{footmisc}
+\renewcommand{\footnotelayout}{\setstretch{1.0}\footnotesize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 13. HEADER & FOOTER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{[Insert Type of Document]} %Adjust
+\fancyhead[R]{\today}
+\fancyfoot[C]{\thepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 14. CLICKABLE LINKS & SMART REFERENCES
+%       cleveref enables \cref{} for automatic "Figure 3" style references
+%       instead of manually typing "Figure~\ref{}".
+%       Adjust for a different color (e.g. blue), research options before changing.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[
+    colorlinks=true,
+    linkcolor=black,                    
+    citecolor=black,
+    urlcolor=blue,
+    pdftitle={Your Document},
+    pdfpagemode=FullScreen,
+]{hyperref}
+\usepackage{cleveref}
+\usepackage{xurl}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 15. CUSTOM SHORTCUTS: your own math notation commands, logo insert or what else.
+%       Add all your other \newcommand's below here so its tidy.
+%       Example: \E{X} produces E[X] (expected value).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\UniversityLogo}{images/university_logo.png}      % path to logo file
+\newcommand{\UniversityLogoScale}{0.015}                      % scale of the logo
+\newcommand{\E}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\Var}[1]{\mathrm{Var}\left[#1\right]}
+\newcommand{\B}{\beta}
+

@@ -1,0 +1,43 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BIBLIOGRAPHY: author-year citations (natbib/plainnat = Harvard style,
+%     common in economics).
+%
+%     HOW CITATIONS WORK (mechanism explained):
+%     - All sources live in a separate plain-text file, e.g. references.bib,
+%       NOT in this .tex file. Each entry has a unique key (e.g. smith2020)
+%       plus fields like author, title, year, journal.
+%     - \bibliography{references} at the END of your document (without the
+%       .bib extension) tells LaTeX which file to pull from.
+%     - \bibliographystyle{plainnat} below controls the FORMAT of both the
+%       in-text citations and the final reference list. You never type the
+%       full reference yourself; it's auto-generated from the .bib fields.
+%     - \citep{smith2020}  ->  "(Smith, 2020)"   use when the name is NOT
+%       part of your sentence grammar.
+%     - \citet{smith2020}  ->  "Smith (2020)"    use when the name flows
+%       into the sentence, e.g. "As \citet{smith2020} argues..."
+%
+%     ABBREVIATING A FREQUENTLY-CITED SOURCE:
+%     If you cite the same paper repeatedly (e.g. a key theory paper),
+%     define a shortcut once in the preamble:
+%       \newcommand{\smithcite}{\citep{smith2020}}
+%     Then just type \smithcite throughout instead of retyping the full
+%     \citep{smith2020} each time. Useful if you later want to change how
+%     that one source is cited everywhere at once.
+%
+%     COSMETIC APA-LIKE FALLBACK (stay on natbib/bibtex, no engine switch):
+%     If a professor asks for "APA-ish" formatting but you don't want to
+%     deal with biblatex+biber, just change the style below to:
+%       \bibliographystyle{apalike}
+%     Everything else (citep/citet, bibtex compilation) stays identical.
+%
+%     FULL APA 7 / CHICAGO AUTHOR-DATE (more accurate, bigger switch):
+%     Requires replacing natbib entirely with biblatex + biber backend and
+%     renaming citation commands (citep -> autocite/parencite,
+%     citet -> textcite). Only worth it if the professor requires the
+%     precise official style rather than something "close enough".
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[round,authoryear]{natbib}
+\bibliographystyle{plainnat}  % change to apalike for a quick APA-like look
+\setlength{\bibhang}{1em}
+\renewcommand{\bibfont}{\small}
+\setlength{\bibsep}{1.2em}

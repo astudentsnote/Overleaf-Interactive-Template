@@ -1,0 +1,178 @@
+\documentclass[t, 9pt]{beamer}
+
+%% =====================================================================
+%%  HOW TO CUSTOMISE THIS SLIDES TEMPLATE
+%% =====================================================================
+%
+%  1. UNIVERSITY & DEPARTMENT: edit the "UNIVERSITY / PRESENTATION
+%     CONFIGURATION" block in Preamble_slides.tex (point 11):
+%     \UniversityName, \UniversityLogo, \DepartmentName.
+%     Everything else in the preamble can stay untouched.
+%
+%  2. TITLE, AUTHOR, PLACE: edit these directly in
+%     Titlepage_Options/Titlepage_slides.tex, inside the \title{},
+%     \author{}, and \institute{} commands. Add extra lines (e.g. a
+%     supervisor's address inside \institute{}) as needed.
+%
+%  3. CHAPTERS / AGENDA: edit \ChapterList in the config block --
+%     it's a single comma-separated line, e.g.
+%       \def\ChapterList{Intro,Theory,Data,Results,Conclusion,Appendix}
+%     Add a name to insert a chapter, delete one to remove it. No other
+%     file needs to change for this step.
+%
+%  4. STARTING A NEW CHAPTER IN THE SLIDES: use
+%       \section{ChapterName}
+%       \SetFootline{N}
+%     where ChapterName matches an entry in \ChapterList, and N is that
+%     entry's position (counting from 1). This highlights the current
+%     phase in the progress bar at the bottom of every following slide.
+%     IMPORTANT: if you add/remove a chapter in step 3, double-check that
+%     all \SetFootline{N} numbers after that point still match the new
+%     list order.
+%
+%  5. ADDING A SLIDE: use
+%       \begin{frame}{Slide Title}
+%           content here
+%       \end{frame}
+%     Add [c] after \begin{frame} to vertically center short content,
+%     e.g. \begin{frame}[c]{Slide Title}.
+%
+%  6. TABLE OF CONTENTS (optional): Template_slides.tex has two commented-
+%     out options right after the title page -- a single upfront TOC
+%     slide, or a recurring outline slide shown before every section.
+%     Uncomment ONLY ONE of the two blocks if you want either.
+%
+%  7. THEME COLOUR: change \definecolor{ThemeColor}{RGB}{...} in the
+%     config block to re-brand the whole template (list markers,
+%     progress bar, tcolorbox highlights all update automatically).
+%
+%  8. LOGO: swap the file at \UniversityLogo's path (config block) with
+%     your own image, keeping the same filename or updating the path.
+%
+%  9. HIGHLIGHTED BOXES: wrap any key takeaway in
+%       \begin{tcolorbox}[insightsbox]
+%           Your text here.
+%       \end{tcolorbox}
+%     to get the pre-styled "Implication" box used throughout.
+%
+%  10. CITATIONS: cite sources on slides exactly like in the thesis, e.g.
+%      \citep{miller2021} or \citet{miller2021}.
+%
+%  11. BIBLIOGRAPHY SLIDE: already included near the end of the file
+%      (\bibliography{references}); no style needs to be set there.
+%
+%  Everything below THEME SETUP in Preamble_slides.tex is internal theme
+%  logic (i.e. you shouldn't need to touch it for normal use).
+%% =====================================================================
+
+
+
+\input{Preamble_slides}
+
+\begin{document}
+
+\input{Titlepage_Options/Titlepage_slides}
+
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+%% =====================================================================
+%%  TABLE OF CONTENTS OPTIONS (if wanted) 
+%% =====================================================================
+
+%---- OPTION A: Single TOC slide, shown once near the beginning ----%
+% Simple and most common choice for a thesis defense: one outline slide
+% right after the title page, not repeated anywhere else.
+
+%\begin{frame}[plain]
+%  \tableofcontents
+%\end{frame}
+
+
+%---- OPTION B: Recurring outline slide before every section ----%
+% Shows a mini "where are we now" outline slide automatically before
+% each \section{}, with the current section highlighted. Useful for
+% longer presentations where the audience may lose track of structure,
+% but adds one extra slide per chapter (e.g. 6 chapters = 6 extra slides).
+
+%\AtBeginSection[]
+%{
+%  \begin{frame}[plain]
+%    \frametitle{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+
+%% =====================================================================
+%%  This loads the tutorial for slides, comment out 
+%%  when building your own and uncomment \section{Chapter1} till 
+%%  \end{frame} to start your own. 
+%%
+%% =====================================================================
+
+\input{Sections/Introduction_slides} %look into the file to see whats happening.
+
+
+%% =====================================================================
+%%  Your slides could start here. Comment out
+%%  \input{Sections/Introduction_slides} and uncomment \section{Chapter1}
+%%  till \end{frame} to start your own. 
+%%
+%% =====================================================================
+
+%\section{Chapter1}
+%\SetFootline{1}
+
+%\begin{frame}{Slide Title}
+
+%\end{frame}
+
+%\section{Chapter2}
+%\SetFootline{2}
+
+%\begin{frame}{Slide Title}
+
+%\end{frame}
+
+\section{Chapter3}
+\SetFootline{3}
+
+\begin{frame}{Slide Title}
+
+\end{frame}
+
+\section{Chapter4}
+\SetFootline{4}
+
+\begin{frame}{Slide Title}
+
+\end{frame}
+
+
+\section{Chapter5}
+\SetFootline{5}
+
+\begin{frame}{Slide Title}
+
+\end{frame}
+
+
+\setbeamertemplate{footline}{}
+
+\begin{frame}[c]{Bibliography}
+    \tiny \bibliography{references}
+\end{frame}
+
+\section{Appendix}
+\SetFootline{6}
+
+\begin{frame}{Appendix: Slide Title}
+
+\end{frame}
+
+\end{document}
+
+
