@@ -17,7 +17,15 @@ This repository contains two templates that share the same bibliography, color t
 
 Both templates include their own introduction section explaining how to use them, so you can learn the relevant LaTeX/Beamer basics directly inside the document you're editing.
 
-## Getting Started
+## How to Use This Template (No GitHub Experience Needed)
+
+1. Click the green "Code" button above the file list on this page.
+2. Select "Download ZIP."
+3. Go to Overleaf, click "New Project," then "Upload Project."
+4. Select the ZIP file you just downloaded.
+5. Overleaf will open the project automatically. Follow the instructions in `Template_main.tex` from there.
+
+## Next Step: Getting Started in Overleaf
 
 1. Open the project in Overleaf.
 2. Decide whether you need the document template, the slides template, or both.
